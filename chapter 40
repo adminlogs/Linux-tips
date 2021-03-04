@@ -1,0 +1,6 @@
+create archive of the /etc directory
+[root@centos ~]# tar cvf etc.tar /etc
+[root@centos ~]# tar cvfz etc.tar.gz /etc
+[root@centos ~]# tar cvfj etc.tar.bz /etc
+[root@centos ~]# tar tf etc.tar
+[root@centos ~]# tar xvfp etc.tar -C /root/
