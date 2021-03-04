@@ -7,5 +7,5 @@ create bzip compressed archive of the /etc folder
 create xz compressed archive of the /etc folder
 [root@centos ~]# tar cvfj etc.tar.xz /etc
 [root@centos ~]# tar tf etc.tar
-extract the archive to a specific folder with files and directories original permissions
+extract(x) the archive(f) to a specific folder(C) with files and directories original permissions(**p**)
 [root@centos ~]# tar xvfp etc.tar -C /root/
