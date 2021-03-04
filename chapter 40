@@ -1,6 +1,9 @@
 create archive of the /etc directory
 [root@centos ~]# tar cvf etc.tar /etc
+create gzip compressed archive of the /etc folder
 [root@centos ~]# tar cvfz etc.tar.gz /etc
+create bzip compressed archive of the /etc folder
 [root@centos ~]# tar cvfj etc.tar.bz /etc
 [root@centos ~]# tar tf etc.tar
+extract the archive to a specific folder with files and directories original permissions
 [root@centos ~]# tar xvfp etc.tar -C /root/
