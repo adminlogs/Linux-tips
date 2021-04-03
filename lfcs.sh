@@ -1,6 +1,3 @@
-user@debian:~$ ssh root@192.168.254.250
-root@192.168.254.250's password: 
-Last login: Mon Mar 15 19:03:36 2021
 [root@localhost ~]# yum install -y mdadm policycoreutils-python-utils cryptsetup tar quota rsync samba nfs-utils httpd
 [root@localhost ~]# mdadm --create /dev/md1 --level=5 --raid-disks=3 /dev/sd[b-d]
 mdadm: partition table exists on /dev/sdb
