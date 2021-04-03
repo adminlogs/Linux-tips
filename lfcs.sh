@@ -101,3 +101,23 @@ drwxr-xr-x. 4 root root unconfined_u:object_r:httpd_sys_content_t:s0  4096 Apr  
 total 8
 drwxr-xr-x. 2 root root unconfined_u:object_r:httpd_sys_script_exec_t:s0 4096 Apr  3 18:48 cgi-bin
 drwxr-xr-x. 2 root root unconfined_u:object_r:httpd_sys_content_t:s0     4096 Apr  3 18:48 html
+[root@public ~]# useradd -b /crypted/home -s /bin/zsh -u 10001 axel
+[root@public ~]# useradd -b /crypted/home -s /bin/zsh -u 10002 azel
+[root@public ~]# useradd -b /crypted/home -s /bin/zsh -u 10003 abel
+[root@public ~]# useradd -b /crypted/home -s /bin/zsh -u 10004 akel
+[root@public ~]# ls -lZ /crypted/home
+total 16
+drwx------. 2 abel abel unconfined_u:object_r:user_home_dir_t:s0 4096 Apr  3 19:10 abel
+drwx------. 2 akel akel unconfined_u:object_r:user_home_dir_t:s0 4096 Apr  3 19:11 akel
+drwx------. 2 axel axel unconfined_u:object_r:user_home_dir_t:s0 4096 Apr  3 19:10 axel
+drwx------. 2 azel azel unconfined_u:object_r:user_home_dir_t:s0 4096 Apr  3 19:10 azel
+[root@public ~]# egrep a.el /etc/passwd
+axel:x:10001:10001::/crypted/home/axel:/bin/zsh
+azel:x:10002:10002::/crypted/home/azel:/bin/zsh
+abel:x:10003:10003::/crypted/home/abel:/bin/zsh
+akel:x:10004:10004::/crypted/home/akel:/bin/zsh
+[root@public ~]# groupadd -g 20001 engineers
+[root@public ~]# usermod -aG engineers axel
+[root@public ~]# usermod -aG engineers azel
+[root@public ~]# grep engineers /etc/group
+engineers:x:20001:axel,azel
