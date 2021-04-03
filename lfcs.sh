@@ -72,11 +72,7 @@ Writing superblocks and filesystem accounting information: done
 lost+found
 [root@localhost ~]# hostnamectl set-hostname public.adminlabs.local
 [root@localhost ~]# reboot
-Connection to 192.168.254.250 closed by remote host.
-Connection to 192.168.254.250 closed.
-user@debian:~$ ssh root@192.168.254.250
-root@192.168.254.250's password: 
-Last login: Sat Apr  3 18:20:30 2021 from 192.168.254.1
+
 [root@public ~]# mount -a|grep /crypted
 [root@public ~]# mount |grep /crypted
 /dev/mapper/cryptedpart on /crypted type ext4 (rw,relatime,seclabel,quota,usrquota,grpquota,stripe=256)
@@ -92,16 +88,10 @@ drwxr-xr-x. 4 root root  4096 Apr  3 18:48 www
 total 8
 drwxr-xr-x. 2 root root 4096 Apr  3 18:48 cgi-bin
 drwxr-xr-x. 2 root root 4096 Apr  3 18:48 html
-[root@public ~]# semange fcontext -a -e /var/www /crypted/www
--bash: semange: command not found
 [root@public ~]# semanage fcontext -a -e /var/www /crypted/www
 [root@public ~]# touch /.autorelabel
 [root@public ~]# reboot
-Connection to 192.168.254.250 closed by remote host.
-Connection to 192.168.254.250 closed.
-user@debian:~$ ssh root@192.168.254.250
-root@192.168.254.250's password: 
-Last login: Sat Apr  3 18:41:23 2021 from 192.168.254.1
+
 [root@public ~]# ls -lZ /crypted/
 total 24
 drwxr-xr-x. 2 root root unconfined_u:object_r:home_root_t:s0          4096 Apr  3 18:45 home
@@ -111,4 +101,3 @@ drwxr-xr-x. 4 root root unconfined_u:object_r:httpd_sys_content_t:s0  4096 Apr  
 total 8
 drwxr-xr-x. 2 root root unconfined_u:object_r:httpd_sys_script_exec_t:s0 4096 Apr  3 18:48 cgi-bin
 drwxr-xr-x. 2 root root unconfined_u:object_r:httpd_sys_content_t:s0     4096 Apr  3 18:48 html
-[root@public ~]# 
