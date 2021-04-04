@@ -121,3 +121,68 @@ akel:x:10004:10004::/crypted/home/akel:/bin/zsh
 [root@public ~]# usermod -aG engineers azel
 [root@public ~]# grep engineers /etc/group
 engineers:x:20001:axel,azel
+[root@public ~]# mkdir /crypted/smbshare
+[root@public ~]# semanage fcontext -a -t samba_share_t '/crypted/smbshare(/.*)?'
+[root@public ~]# restorecon -vR /crypted/smbshare/
+Relabeled /crypted/smbshare from unconfined_u:object_r:default_t:s0 to unconfined_u:object_r:samba_share_t:s0
+[root@public ~]# pdbedit -a axel
+[root@public ~]# pdbedit -a azel
+[root@public ~]# setfacl -m g:engineers:rwx /crypted/smbshare 
+[root@public ~]# vi /etc/samba/smb.conf
+[root@public ~]# testparm
+Load smb config files from /etc/samba/smb.conf
+Loaded services file OK.
+Server role: ROLE_STANDALONE
+
+Press enter to see a dump of your service definitions
+
+# Global parameters
+[global]
+	printcap name = cups
+	security = USER
+	workgroup = SAMBA
+	idmap config * : backend = tdb
+	cups options = raw
+
+
+[homes]
+	browseable = No
+	comment = Home Directories
+	inherit acls = Yes
+	read only = No
+	valid users = %S %D%w%S
+
+
+[printers]
+	browseable = No
+	comment = All Printers
+	create mask = 0600
+	path = /var/tmp
+	printable = Yes
+
+
+[print$]
+	comment = Printer Drivers
+	create mask = 0664
+	directory mask = 0775
+	force group = @printadmin
+	path = /var/lib/samba/drivers
+	write list = @printadmin root
+
+
+[smbshare]
+	browseable = No
+	comment = Samba Share
+	directory mask = 0750
+	path = /crypted/smbshare
+	write list = @engineers
+[root@public ~]# firewall-cmd --add-service samba
+success
+[root@public ~]# firewall-cmd --add-service samba --permanent
+success
+[root@public ~]# systemctl enable smb
+Created symlink /etc/systemd/system/multi-user.target.wants/smb.service → /usr/lib/systemd/system/smb.service.
+[root@public ~]# systemctl start smb
+[root@public ~]# systemctl enable nmb
+Created symlink /etc/systemd/system/multi-user.target.wants/nmb.service → /usr/lib/systemd/system/nmb.service.
+[root@public ~]# systemctl start nmb
