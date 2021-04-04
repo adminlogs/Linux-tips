@@ -186,3 +186,31 @@ Created symlink /etc/systemd/system/multi-user.target.wants/smb.service → /usr
 [root@public ~]# systemctl enable nmb
 Created symlink /etc/systemd/system/multi-user.target.wants/nmb.service → /usr/lib/systemd/system/nmb.service.
 [root@public ~]# systemctl start nmb
+
+[root@private ~]# yum install -y samba-client cifs-utils
+[root@private ~]# vi /etc/fstab
+//192.168.1.13/smbshare /smb cifs credentials=/root/.smbcredentials 0 0
+[root@private ~]# vi /root/.smbcredentials
+[root@private ~]# cat /root/.smbcredentials
+username=axel
+password=password
+
+[root@public ~]# quotacheck -mug /crypted/
+[root@public ~]# quotaon -v /crypted/
+/dev/mapper/cryptedpart [/crypted]: group quotas turned on
+/dev/mapper/cryptedpart [/crypted]: user quotas turned on
+[root@public ~]# edquota -u axel -f /crypted/
+Disk quotas for user axel (uid 10001):
+  Filesystem                   blocks       soft       hard     inodes     soft     hard
+  /dev/mapper/cryptedpart          28    512000K    520000K          6        0        0
+[root@public ~]# repquota -u /crypted
+*** Report for user quotas on device /dev/mapper/cryptedpart
+Block grace time: 7days; Inode grace time: 7days
+                        Block limits                File limits
+User            used    soft    hard  grace    used  soft  hard  grace
+----------------------------------------------------------------------
+root      --      44       0       0              7     0     0       
+axel      --      28  512000  520000              6     0     0       
+azel      --      76       0       0              7     0     0       
+abel      --      20       0       0              5     0     0       
+akel      --      20       0       0              5     0     0
