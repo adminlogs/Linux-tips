@@ -214,3 +214,72 @@ axel      --      28  512000  520000              6     0     0
 azel      --      76       0       0              7     0     0       
 abel      --      20       0       0              5     0     0       
 akel      --      20       0       0              5     0     0
+[root@public ~]# nmcli connection add con-name enp0s9 ifname enp0s9 type ethernet autoconnect yes method auto
+[root@public ~]# ip a s
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    inet 127.0.0.1/8 scope host lo
+       valid_lft forever preferred_lft forever
+    inet6 ::1/128 scope host 
+       valid_lft forever preferred_lft forever
+2: enp0s3: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc fq_codel state UP group default qlen 1000
+    link/ether 08:00:27:40:b6:4b brd ff:ff:ff:ff:ff:ff
+    inet 192.168.1.13/24 brd 192.168.1.255 scope global dynamic noprefixroute enp0s3
+       valid_lft 86179sec preferred_lft 86179sec
+    inet6 fd60:e701:ad92:3e00:5624:2386:fbe1:452a/64 scope global dynamic noprefixroute 
+       valid_lft 6981sec preferred_lft 3381sec
+    inet6 fe80::87a3:5a70:8e73:d147/64 scope link noprefixroute 
+       valid_lft forever preferred_lft forever
+3: enp0s8: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc fq_codel state UP group default qlen 1000
+    link/ether 08:00:27:59:53:43 brd ff:ff:ff:ff:ff:ff
+    inet 192.168.254.250/24 brd 192.168.254.255 scope global noprefixroute enp0s8
+       valid_lft forever preferred_lft forever
+    inet6 fe80::a00:27ff:fe59:5343/64 scope link 
+       valid_lft forever preferred_lft forever
+4: enp0s9: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc fq_codel state UP group default qlen 1000
+    link/ether 08:00:27:eb:23:8e brd ff:ff:ff:ff:ff:ff
+    inet 192.168.99.107/24 brd 192.168.99.255 scope global dynamic noprefixroute enp0s9
+       valid_lft 1193sec preferred_lft 1193sec
+    inet6 fe80::4b19:c5f:cc9b:ef5b/64 scope link noprefixroute 
+       valid_lft forever preferred_lft forever
+[root@public ~]# nmcli connection show
+NAME    UUID                                  TYPE      DEVICE 
+enp0s3  c2fa7ad0-7577-4322-9867-af0cb132b081  ethernet  enp0s3 
+enp0s8  a966fd7f-34d5-49c0-9caf-5b8e71a7d915  ethernet  enp0s8 
+enp0s9  94997b79-806d-4a95-83de-e3710e3ae746  ethernet  enp0s9
+[root@public ~]# nmcli connection delete enp0s9
+Connection 'enp0s9' (94997b79-806d-4a95-83de-e3710e3ae746) successfully deleted.
+[root@public ~]# nmcli connection add con-name enp0s9 ifname enp0s9 type ethernet autoconnect yes ip4 192.168.99.250/24
+Connection 'enp0s9' (32229589-cf8f-47e5-979e-c846330acf54) successfully added.
+[root@public ~]# ip a s
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    inet 127.0.0.1/8 scope host lo
+       valid_lft forever preferred_lft forever
+    inet6 ::1/128 scope host 
+       valid_lft forever preferred_lft forever
+2: enp0s3: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc fq_codel state UP group default qlen 1000
+    link/ether 08:00:27:40:b6:4b brd ff:ff:ff:ff:ff:ff
+    inet 192.168.1.13/24 brd 192.168.1.255 scope global dynamic noprefixroute enp0s3
+       valid_lft 85895sec preferred_lft 85895sec
+    inet6 fd60:e701:ad92:3e00:5624:2386:fbe1:452a/64 scope global dynamic noprefixroute 
+       valid_lft 6697sec preferred_lft 3097sec
+    inet6 fe80::87a3:5a70:8e73:d147/64 scope link noprefixroute 
+       valid_lft forever preferred_lft forever
+3: enp0s8: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc fq_codel state UP group default qlen 1000
+    link/ether 08:00:27:59:53:43 brd ff:ff:ff:ff:ff:ff
+    inet 192.168.254.250/24 brd 192.168.254.255 scope global noprefixroute enp0s8
+       valid_lft forever preferred_lft forever
+    inet6 fe80::a00:27ff:fe59:5343/64 scope link 
+       valid_lft forever preferred_lft forever
+4: enp0s9: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc fq_codel state UP group default qlen 1000
+    link/ether 08:00:27:eb:23:8e brd ff:ff:ff:ff:ff:ff
+    inet 192.168.99.250/24 brd 192.168.99.255 scope global noprefixroute enp0s9
+       valid_lft forever preferred_lft forever
+    inet6 fe80::b4a2:303b:4dd3:f86/64 scope link noprefixroute 
+       valid_lft forever preferred_lft forever
+[root@public ~]# nmcli connection show
+NAME    UUID                                  TYPE      DEVICE 
+enp0s3  c2fa7ad0-7577-4322-9867-af0cb132b081  ethernet  enp0s3 
+enp0s8  a966fd7f-34d5-49c0-9caf-5b8e71a7d915  ethernet  enp0s8 
+enp0s9  32229589-cf8f-47e5-979e-c846330acf54  ethernet  enp0s9
