@@ -70,3 +70,23 @@ mdadm: array /dev/md0 started.
   Read ahead sectors     auto
   - currently set to     8192
   Block device           253:2
+
+[root@public ~]# dd if=/dev/urandom of=/boot/keyfile bs=1K count=1
+1+0 records in
+1+0 records out
+1024 bytes (1.0 kB, 1.0 KiB) copied, 0.000336448 s, 3.0 MB/s
+[root@public ~]# chmod 400 /boot/keyfile
+[root@public ~]# cryptsetup luksFormat /dev/lvmraidvg/lvmraidlv
+
+WARNING!
+========
+This will overwrite data on /dev/lvmraidvg/lvmraidlv irrevocably.
+
+Are you sure? (Type 'yes' in capital letters): YES
+Enter passphrase for /dev/lvmraidvg/lvmraidlv: 
+Verify passphrase: 
+[root@public ~]# cryptsetup luksOpen /dev/lvmraidvg/lvmraidlv cryptedpart
+Enter passphrase for /dev/lvmraidvg/lvmraidlv: 
+[root@public ~]# cryptsetup luksAddKey /dev/lvmraidvg/lvmraidlv /boot/keyfile 
+Enter any existing passphrase:
+[root@public ~]# 
