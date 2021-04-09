@@ -154,4 +154,3 @@ administrators:x:20000:
 **[root@public ~]# usermod -aG administrators abel**  
 **[root@public ~]# grep administrators /etc/group**  
 administrators:x:20000:abel  
-**[root@public ~]# **  
