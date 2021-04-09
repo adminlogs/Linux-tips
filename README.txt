@@ -90,3 +90,41 @@ Enter passphrase for /dev/lvmraidvg/lvmraidlv:
 [root@public ~]# cryptsetup luksAddKey /dev/lvmraidvg/lvmraidlv /boot/keyfile 
 Enter any existing passphrase:
 [root@public ~]# 
+[root@public ~]# vi /etc/crypttab
+[root@public ~]# cat /etc/crypttab 
+cryptedpart /dev/lvmraidvg/lvmraidlv /boot/keyfile
+[root@public ~]# mkfs.ext4 /dev/mapper/cryptedpart 
+mke2fs 1.45.6 (20-Mar-2020)
+Creating filesystem with 2089984 4k blocks and 523264 inodes
+Filesystem UUID: b42b22ff-f0bb-4ef2-8290-35e0c66fb8f7
+Superblock backups stored on blocks: 
+	32768, 98304, 163840, 229376, 294912, 819200, 884736, 1605632
+
+Allocating group tables: done                            
+Writing inode tables: done                            
+Creating journal (16384 blocks): done
+Writing superblocks and filesystem accounting information: done 
+
+[root@public ~]# mkdir /secured
+[root@public ~]# vi /etc/fstab
+[root@public ~]# cat /etc/fstab 
+
+#
+# /etc/fstab
+# Created by anaconda on Thu Oct 10 19:59:02 2019
+#
+# Accessible filesystems, by reference, are maintained under '/dev/disk/'.
+# See man pages fstab(5), findfs(8), mount(8) and/or blkid(8) for more info.
+#
+# After editing this file, run 'systemctl daemon-reload' to update systemd
+# units generated from this file.
+#
+/dev/mapper/cl-root     /                       xfs     defaults        0 0
+UUID=de5581b0-03a4-4e5d-9d5c-ea380355dbde /boot                   ext4    defaults        1 2
+/dev/mapper/cl-swap     swap                    swap    defaults        0 0
+/dev/mapper/cryptedpart /secured                ext4    defaults,usrquota,grpquota        0 0
+[root@public ~]# mount -a
+[root@public ~]# ls -l /secured/
+total 16
+drwx------. 2 root root 16384 Apr  9 03:02 lost+found
+[root@localhost ~]# 
