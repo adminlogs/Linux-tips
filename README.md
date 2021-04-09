@@ -68,7 +68,7 @@ mdadm: array /dev/md0 started.
   Segments               1  
   Allocation             inherit  
   Read ahead sectors     auto  
-  - currently set to     8192  
+  \- currently set to     8192  
   Block device           253:2  
 
 **[root@public ~]# dd if=/dev/urandom of=/boot/keyfile bs=1K count=1**  
