@@ -10,7 +10,7 @@ mdadm: partition table exists on /dev/sdd but will be lost or
        meaningless after creating array  
 Continue creating array? y  
 mdadm: Defaulting to version 1.2 metadata  
->mdadm: array /dev/md0 started.  
+mdadm: array /dev/md0 started.  
 **[root@public ~]# watch cat /proc/mdstat**  
 **[root@public ~]# pvcreate /dev/md0**  
   Physical volume "/dev/md0" successfully created.  
