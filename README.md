@@ -79,7 +79,7 @@ mdadm: array /dev/md0 started.
 [root@public ~]# cryptsetup luksFormat /dev/lvmraidvg/lvmraidlv  
 
 WARNING!  
-========  
+\========  
 This will overwrite data on /dev/lvmraidvg/lvmraidlv irrevocably.  
 
 Are you sure? (Type 'yes' in capital letters): YES  
