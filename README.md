@@ -11,10 +11,10 @@ mdadm: partition table exists on /dev/sdd but will be lost or
 Continue creating array? y
 mdadm: Defaulting to version 1.2 metadata
 mdadm: array /dev/md0 started.
-[root@public ~]# watch cat /proc/mdstat
-[root@public ~]# pvcreate /dev/md0
+**[root@public ~]# watch cat /proc/mdstat**
+**[root@public ~]# pvcreate /dev/md0**
   Physical volume "/dev/md0" successfully created.
-[root@public ~]# pvdisplay /dev/md0
+**[root@public ~]# pvdisplay /dev/md0**
   "/dev/md0" is a new physical volume of "15.98 GiB"
   --- NEW Physical volume ---
   PV Name               /dev/md0
@@ -27,9 +27,9 @@ mdadm: array /dev/md0 started.
   Allocated PE          0
   PV UUID               QsHJGB-hDEE-8nAT-XiS7-IItH-8Je1-kVuYgx
    
-[root@public ~]# vgcreate lvmraidvg /dev/md0
+**[root@public ~]# vgcreate lvmraidvg /dev/md0**
   Volume group "lvmraidvg" successfully created
-[root@public ~]# vgdisplay lvmraidvg
+**[root@public ~]# vgdisplay lvmraidvg**
   --- Volume group ---
   VG Name               lvmraidvg
   System ID             
