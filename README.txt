@@ -1,4 +1,4 @@
-[root@public ~]# mdadm --create /dev/md0 --level 5 --raid-disks 3 /dev/sd[b-d]
+**[root@public ~]# mdadm --create /dev/md0 --level 5 --raid-disks 3 /dev/sd[b-d]**
 mdadm: partition table exists on /dev/sdb
 mdadm: partition table exists on /dev/sdb but will be lost or
        meaningless after creating array
