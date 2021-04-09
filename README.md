@@ -126,10 +126,6 @@ UUID=de5581b0-03a4-4e5d-9d5c-ea380355dbde /boot                   ext4    defaul
 **[root@public ~]# ls -l /secured/**  
 total 16  
 drwx------. 2 root root 16384 Apr  9 03:02 lost+found  
-**[root@localhost ~]# ls -Zd /**  
-system_u:object_r:root_t:s0 /  
-**[root@localhost ~]# semanage fcontext -a -e / /secured/**  
-ValueError: Target /secured/ is not valid. Target is not allowed to end with '/'  
 **[root@localhost ~]# semanage fcontext -a -e / /secured**  
 **[root@localhost ~]# ls -dZ /**  
 system_u:object_r:root_t:s0 /  
