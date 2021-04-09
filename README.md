@@ -148,3 +148,10 @@ total 4
 drwx------. 2 abel abel unconfined_u:object_r:user_home_dir_t:s0 4096 Apr  9 08:18 sysadmin  
 **[root@public ~]# grep abel /etc/passwd**  
 abel:x:10000:10000::/secured/home/sysadmin:/bin/zsh  
+**[root@public ~]# groupadd -g 20000 administrators**  
+**[root@public ~]# grep administrators /etc/group**  
+administrators:x:20000:  
+**[root@public ~]# usermod -aG administrators abel**  
+**[root@public ~]# grep administrators /etc/group**  
+administrators:x:20000:abel  
+**[root@public ~]# **  
