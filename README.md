@@ -1,4 +1,4 @@
-`<addr>`**[root@public ~]# mdadm --create /dev/md0 --level 5 --raid-disks 3 /dev/sd[b-d]**  
+**[root@public ~]# mdadm --create /dev/md0 --level 5 --raid-disks 3 /dev/sd[b-d]**  
 mdadm: partition table exists on /dev/sdb    
 mdadm: partition table exists on /dev/sdb but will be lost or  
        meaningless after creating array  
@@ -126,4 +126,23 @@ UUID=de5581b0-03a4-4e5d-9d5c-ea380355dbde /boot                   ext4    defaul
 **[root@public ~]# ls -l /secured/**  
 total 16  
 drwx------. 2 root root 16384 Apr  9 03:02 lost+found  
-**[root@public ~]#**   
+**[root@localhost ~]# ls -Zd /**  
+system_u:object_r:root_t:s0 /  
+**[root@localhost ~]# semanage fcontext -a -e / /secured/**  
+ValueError: Target /secured/ is not valid. Target is not allowed to end with '/'  
+**[root@localhost ~]# semanage fcontext -a -e / /secured**  
+**[root@localhost ~]# ls -dZ /**  
+system_u:object_r:root_t:s0 /  
+**[root@localhost ~]# ls -dZ /secured/**  
+system_u:object_r:unlabeled_t:s0 /secured/  
+**[root@localhost ~]# touch /.autorelabel**  
+**[root@localhost ~]# reboot**  
+**[root@localhost ~]# ls -dZ /secured/**  
+system_u:object_r:root_t:s0 /secured/  
+**[root@localhost ~]# mkdir /secured/home**  
+**[root@localhost ~]# ls -Z /secured/**  
+unconfined_u:object_r:default_t:s0 home   system_u:object_r:lost_found_t:s0 lost+found  
+**[root@localhost ~]# touch /.autorelabel**  
+**[root@localhost ~]# reboot**  
+**[root@localhost ~]# ls -Z /secured**  
+unconfined_u:object_r:home_root_t:s0 home     system_u:object_r:lost_found_t:s0 lost+found  
