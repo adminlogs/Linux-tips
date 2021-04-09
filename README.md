@@ -142,3 +142,9 @@ unconfined_u:object_r:default_t:s0 home   system_u:object_r:lost_found_t:s0 lost
 **[root@localhost ~]# reboot**  
 **[root@localhost ~]# ls -Z /secured**  
 unconfined_u:object_r:home_root_t:s0 home     system_u:object_r:lost_found_t:s0 lost+found  
+**[root@public ~]# useradd -d /secured/home/sysadmin -u 10000 -s /bin/zsh abel**  
+**[root@public ~]# ls -lZ /secured/home/**  
+total 4  
+drwx------. 2 abel abel unconfined_u:object_r:user_home_dir_t:s0 4096 Apr  9 08:18 sysadmin  
+**[root@public ~]# grep abel /etc/passwd**  
+abel:x:10000:10000::/secured/home/sysadmin:/bin/zsh  
