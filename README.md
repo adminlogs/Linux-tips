@@ -62,7 +62,7 @@ mdadm: array /dev/md0 started.
   LV Write Access        read/write  
   LV Creation host, time localhost.localdomain, 2021-04-08 21:35:08 +0100  
   LV Status              available  
-  # open                 0  
+  \# open                 0  
   LV Size                <7.99 GiB  
   Current LE             2045  
   Segments               1  
@@ -108,16 +108,16 @@ Writing superblocks and filesystem accounting information: done
 **[root@public ~]# vi /etc/fstab**  
 **[root@public ~]# cat /etc/fstab**   
 
-#  
-# /etc/fstab  
-# Created by anaconda on Thu Oct 10 19:59:02 2019  
-#  
-# Accessible filesystems, by reference, are maintained under '/dev/disk/'.  
-# See man pages fstab(5), findfs(8), mount(8) and/or blkid(8) for more info.  
-#  
-# After editing this file, run 'systemctl daemon-reload' to update systemd  
-# units generated from this file.  
-#  
+\#  
+\# /etc/fstab  
+\# Created by anaconda on Thu Oct 10 19:59:02 2019  
+\#  
+\# Accessible filesystems, by reference, are maintained under '/dev/disk/'.  
+\# See man pages fstab(5), findfs(8), mount(8) and/or blkid(8) for more info.  
+\#  
+\# After editing this file, run 'systemctl daemon-reload' to update systemd  
+\# units generated from this file.  
+\#  
 /dev/mapper/cl-root     /                       xfs     defaults        0 0  
 UUID=de5581b0-03a4-4e5d-9d5c-ea380355dbde /boot                   ext4    defaults        1 2  
 /dev/mapper/cl-swap     swap                    swap    defaults        0 0  
