@@ -106,7 +106,7 @@ Writing superblocks and filesystem accounting information: done
 
 **[root@public ~]# mkdir /secured**  
 **[root@public ~]# vi /etc/fstab**  
-**[root@public ~]# cat /etc/fstab**   
+**[root@public ~]# cat /etc/fstab**  
 
 \#  
 \# /etc/fstab  
@@ -126,4 +126,4 @@ UUID=de5581b0-03a4-4e5d-9d5c-ea380355dbde /boot                   ext4    defaul
 **[root@public ~]# ls -l /secured/**  
 total 16  
 drwx------. 2 root root 16384 Apr  9 03:02 lost+found  
-**[root@localhost ~]#**   
+**[root@public ~]#**   
