@@ -51,9 +51,9 @@ mdadm: array /dev/md0 started.
   Free  PE / Size       4091 / 15.98 GiB
   VG UUID               pYWf2Y-5j3b-pKlW-LaCL-mr36-KBBv-TWi3jN
    
-[root@public ~]# lvcreate -n lvmraidlv -l 50%VG lvmraidvg
+**[root@public ~]# lvcreate -n lvmraidlv -l 50%VG lvmraidvg**
   Logical volume "lvmraidlv" created.
-[root@public ~]# lvdisplay /dev/lvmraidvg/lvmraidlv 
+**[root@public ~]# lvdisplay /dev/lvmraidvg/lvmraidlv** 
   --- Logical volume ---
   LV Path                /dev/lvmraidvg/lvmraidlv
   LV Name                lvmraidlv
@@ -71,11 +71,11 @@ mdadm: array /dev/md0 started.
   - currently set to     8192
   Block device           253:2
 
-[root@public ~]# dd if=/dev/urandom of=/boot/keyfile bs=1K count=1
+**[root@public ~]# dd if=/dev/urandom of=/boot/keyfile bs=1K count=1**
 1+0 records in
 1+0 records out
 1024 bytes (1.0 kB, 1.0 KiB) copied, 0.000336448 s, 3.0 MB/s
-[root@public ~]# chmod 400 /boot/keyfile
+**[root@public ~]# chmod 400 /boot/keyfile**
 [root@public ~]# cryptsetup luksFormat /dev/lvmraidvg/lvmraidlv
 
 WARNING!
@@ -85,15 +85,14 @@ This will overwrite data on /dev/lvmraidvg/lvmraidlv irrevocably.
 Are you sure? (Type 'yes' in capital letters): YES
 Enter passphrase for /dev/lvmraidvg/lvmraidlv: 
 Verify passphrase: 
-[root@public ~]# cryptsetup luksOpen /dev/lvmraidvg/lvmraidlv cryptedpart
+**[root@public ~]# cryptsetup luksOpen /dev/lvmraidvg/lvmraidlv cryptedpart**
 Enter passphrase for /dev/lvmraidvg/lvmraidlv: 
-[root@public ~]# cryptsetup luksAddKey /dev/lvmraidvg/lvmraidlv /boot/keyfile 
+**[root@public ~]# cryptsetup luksAddKey /dev/lvmraidvg/lvmraidlv /boot/keyfile** 
 Enter any existing passphrase:
-[root@public ~]# 
-[root@public ~]# vi /etc/crypttab
-[root@public ~]# cat /etc/crypttab 
+**[root@public ~]# vi /etc/crypttab**
+**[root@public ~]# cat /etc/crypttab** 
 cryptedpart /dev/lvmraidvg/lvmraidlv /boot/keyfile
-[root@public ~]# mkfs.ext4 /dev/mapper/cryptedpart 
+**[root@public ~]# mkfs.ext4 /dev/mapper/cryptedpart** 
 mke2fs 1.45.6 (20-Mar-2020)
 Creating filesystem with 2089984 4k blocks and 523264 inodes
 Filesystem UUID: b42b22ff-f0bb-4ef2-8290-35e0c66fb8f7
@@ -105,9 +104,9 @@ Writing inode tables: done
 Creating journal (16384 blocks): done
 Writing superblocks and filesystem accounting information: done 
 
-[root@public ~]# mkdir /secured
-[root@public ~]# vi /etc/fstab
-[root@public ~]# cat /etc/fstab 
+**[root@public ~]# mkdir /secured**
+**[root@public ~]# vi /etc/fstab**
+**[root@public ~]# cat /etc/fstab** 
 
 #
 # /etc/fstab
@@ -123,8 +122,8 @@ Writing superblocks and filesystem accounting information: done
 UUID=de5581b0-03a4-4e5d-9d5c-ea380355dbde /boot                   ext4    defaults        1 2
 /dev/mapper/cl-swap     swap                    swap    defaults        0 0
 /dev/mapper/cryptedpart /secured                ext4    defaults,usrquota,grpquota        0 0
-[root@public ~]# mount -a
-[root@public ~]# ls -l /secured/
+**[root@public ~]# mount -a**
+**[root@public ~]# ls -l /secured/**
 total 16
 drwx------. 2 root root 16384 Apr  9 03:02 lost+found
-[root@localhost ~]# 
+**[root@localhost ~]#** 
